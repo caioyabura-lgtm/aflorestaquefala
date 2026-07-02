@@ -9,8 +9,9 @@ const COVER_SCALE = 0.78;
 const OPENING_DURATION = 3;
 const OPENING_TURN = Math.PI;
 const OPENING_ORBIT_DIRECTION = 1;
-const ZOOM_NEAR_FACTOR = 0.08;
-const ZOOM_FAR_FACTOR = 1.45;
+const ZOOM_NEAR_FACTOR = 0.04;
+const ZOOM_FAR_FACTOR = 1.30;
+const ZOOM_IN_SCROLL_BOOST = 0.003;
 const FRAME_GUIDE_NAMES = new Set([
   "ENQUADRAMENTO",
   "GUIA_CAPA",
@@ -106,6 +107,27 @@ export function createCamera(canvas, debug = false) {
   state.controls.zoomSpeed = 0.55;
   state.controls.enableRotate = false;
   interactionSurface.style.cursor = "default";
+
+  // OrbitControls usa a mesma intensidade nos dois sentidos. Este segundo
+  // passo torna somente o avanço da roda mais profundo, preservando o recuo.
+  interactionSurface.addEventListener("wheel", event => {
+    if (!state.controls.enabled || event.deltaY >= 0) return;
+
+    const deltaScale = event.deltaMode === 1
+      ? 16
+      : event.deltaMode === 2 ? window.innerHeight : 1;
+    const wheelDistance = Math.min(Math.abs(event.deltaY) * deltaScale, 160);
+    const offset = camera.position.clone().sub(state.controls.target);
+    const distance = offset.length();
+    const boostedDistance = Math.max(
+      state.controls.minDistance,
+      distance * Math.exp(-wheelDistance * ZOOM_IN_SCROLL_BOOST)
+    );
+
+    offset.setLength(boostedDistance);
+    camera.position.copy(state.controls.target).add(offset);
+    state.controls.update();
+  }, { passive: true });
 
   return camera;
 }

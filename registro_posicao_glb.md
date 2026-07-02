@@ -30,8 +30,8 @@ modelo, inclusive nas posições dos objetos, produzirá outro hash.
 - Fator de cobertura: `0.78`
 - Offset artístico final: `X +0.15`, `Y -0.10`, `Z +0.80`
 - Abertura: órbita de `180°`
-- Interação posterior: somente zoom; avanço profundo entre camadas (`8%` da
-  distância inicial) e recuo limitado (`145%`).
+- Interação posterior: somente zoom; avanço profundo entre camadas (`4%` da
+  distância inicial), com impulso adicional na roda, e recuo limitado (`130%`).
 
 Este registro descreve tanto a exportação quanto as transformações que determinam sua
 posição visual no navegador.
