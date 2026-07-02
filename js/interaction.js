@@ -15,13 +15,6 @@ export function setupHorizontalNavigation() {
   }));
 
   rail.addEventListener("scroll", update, { passive: true });
-  addEventListener("wheel", event => {
-    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-      event.preventDefault();
-      rail.scrollLeft += event.deltaY;
-    }
-  }, { passive: false });
-
   addEventListener("keydown", event => {
     if (event.key === "ArrowRight") {
       rail.scrollBy({ left: innerWidth, behavior: "smooth" });

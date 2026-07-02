@@ -9,6 +9,8 @@ const COVER_SCALE = 0.78;
 const OPENING_DURATION = 3;
 const OPENING_TURN = Math.PI;
 const OPENING_ORBIT_DIRECTION = 1;
+const ZOOM_NEAR_FACTOR = 0.08;
+const ZOOM_FAR_FACTOR = 1.45;
 const FRAME_GUIDE_NAMES = new Set([
   "ENQUADRAMENTO",
   "GUIA_CAPA",
@@ -73,6 +75,11 @@ function applyFitDistance(camera, distance) {
     state.modelSize.length() * 4,
     INITIAL_POSITION.z * 2
   );
+  if (state.controls) {
+    const fittedDistance = distance + CAMERA_ART_OFFSET.z;
+    state.controls.minDistance = Math.max(fittedDistance * ZOOM_NEAR_FACTOR, 0.03);
+    state.controls.maxDistance = fittedDistance * ZOOM_FAR_FACTOR;
+  }
   camera.updateProjectionMatrix();
 }
 
@@ -95,21 +102,10 @@ export function createCamera(canvas, debug = false) {
   state.controls.enableDamping = true;
   state.controls.dampingFactor = debug ? 0.12 : 0.08;
   state.controls.enablePan = false;
-  state.controls.enableZoom = false;
-  state.controls.enableRotate = true;
-  state.controls.rotateSpeed = 0.55;
-  state.controls.minPolarAngle = 0.15;
-  state.controls.maxPolarAngle = Math.PI - 0.15;
-  state.controls.minAzimuthAngle = -Infinity;
-  state.controls.maxAzimuthAngle = Infinity;
-
-  interactionSurface.style.cursor = "grab";
-  interactionSurface.addEventListener("pointerdown", () => {
-    interactionSurface.style.cursor = "grabbing";
-  });
-  addEventListener("pointerup", () => {
-    interactionSurface.style.cursor = "grab";
-  });
+  state.controls.enableZoom = true;
+  state.controls.zoomSpeed = 0.55;
+  state.controls.enableRotate = false;
+  interactionSurface.style.cursor = "default";
 
   return camera;
 }
