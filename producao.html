@@ -8,16 +8,16 @@
   <title>Produção — A Floresta que Fala</title>
   <style>
     :root {
-      --fundo: #071812;
+      --fundo: #1E1E1E;
       --painel: rgba(249, 249, 248, .035);
-      --painel-forte: rgba(18, 58, 42, .54);
+      --painel-forte: rgba(45, 114, 107, .54);
       --texto: #f9f9f8;
       --suave: rgba(249, 249, 248, .64);
       --discreto: rgba(249, 249, 248, .4);
       --linha: rgba(249, 249, 248, .15);
-      --coral: #ff7862;
-      --areia: #efe5da;
-      --verde-claro: #8fc9a6;
+      --coral: #00ECD3;
+      --areia: #A8B446;
+      --verde-claro: #09BDAA;
       --largura: 1120px;
     }
 
@@ -230,6 +230,66 @@
       letter-spacing: .04em;
     }
 
+    .dashboard-panel {
+      padding: 2.25rem 0 0;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .dashboard-card {
+      padding: 1.5rem;
+      border: 1px solid var(--linha);
+      border-radius: 1.5rem .35rem;
+      background: rgba(249, 249, 248, .06);
+      min-height: 9rem;
+    }
+
+    .dashboard-card-large {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dashboard-card-label {
+      margin: 0 0 .85rem;
+      color: var(--areia);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .dashboard-card-value {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      letter-spacing: -.05em;
+    }
+
+    .dashboard-task-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: .55rem;
+    }
+
+    .dashboard-task-list li {
+      margin: 0;
+      padding: .8rem 1rem;
+      border: 1px solid var(--linha);
+      border-radius: .85rem;
+      background: rgba(249, 249, 248, .04);
+      color: var(--suave);
+      font-size: .9rem;
+      line-height: 1.4;
+    }
+
     .change-user {
       padding: 0;
       border: 0;
@@ -412,6 +472,108 @@
       font-size: .7rem;
     }
 
+    .agenda-layout {
+      display: grid;
+      grid-template-columns: minmax(16rem, .75fr) minmax(0, 1.25fr);
+      gap: 1.25rem;
+    }
+
+    .agenda-form,
+    .agenda-lista {
+      padding: clamp(1.25rem, 3vw, 2rem);
+      border: 1px solid var(--linha);
+      border-radius: 1.5rem .35rem;
+      background: var(--painel);
+    }
+
+    .agenda-form h3,
+    .agenda-lista h3 {
+      margin: 0 0 1.25rem;
+      color: var(--areia);
+    }
+
+    .agenda-fields {
+      display: grid;
+      gap: .8rem;
+    }
+
+    .agenda-fields input,
+    .agenda-fields textarea {
+      width: 100%;
+      padding: .8rem .9rem;
+      border: 1px solid var(--linha);
+      border-radius: .5rem;
+      color: var(--texto);
+      background: var(--fundo);
+      font: inherit;
+    }
+
+    .agenda-fields textarea {
+      min-height: 7rem;
+      resize: vertical;
+    }
+
+    .agenda-fields input:focus-visible,
+    .agenda-fields textarea:focus-visible {
+      border-color: var(--coral);
+      outline: 2px solid rgba(255, 120, 98, .2);
+      outline-offset: 2px;
+    }
+
+    .agenda-submit {
+      width: 100%;
+      margin-top: .25rem;
+      padding: .8rem 1rem;
+      border: 1px solid var(--coral);
+      border-radius: 999px;
+      color: var(--fundo);
+      background: var(--coral);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .agenda-submit:disabled {
+      cursor: wait;
+      opacity: .6;
+    }
+
+    .agenda-status {
+      min-height: 1.2rem;
+      margin: .8rem 0 0;
+      color: var(--suave);
+      font-size: .75rem;
+    }
+
+    .agenda-table-wrap {
+      overflow-x: auto;
+    }
+
+    .agenda-lista table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+    }
+
+    .agenda-lista th,
+    .agenda-lista td {
+      padding: .75rem;
+      border-bottom: 1px solid var(--linha);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .agenda-lista th {
+      color: var(--coral);
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .agenda-empty {
+      color: var(--discreto);
+      text-align: center !important;
+    }
+
     .delivery-list {
       display: grid;
       gap: .75rem;
@@ -474,6 +636,88 @@
     .status.sent { color: #a8cfed; border-color: rgba(168, 207, 237, .3); }
     .status.waiting { color: #d8b5ed; border-color: rgba(216, 181, 237, .3); }
     .status.done { color: #a9d8ba; border-color: rgba(169, 216, 186, .3); }
+
+    .task-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border: 1px solid var(--linha);
+      border-radius: 1.5rem .35rem;
+      background: var(--painel);
+    }
+
+    .task-field {
+      display: grid;
+      gap: .5rem;
+    }
+
+    .task-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .task-field label {
+      color: var(--discreto);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .task-field input,
+    .task-field textarea {
+      width: 100%;
+      padding: .85rem .9rem;
+      border: 1px solid var(--linha);
+      border-radius: .5rem;
+      color: var(--texto);
+      background: var(--fundo);
+      font: inherit;
+    }
+
+    .task-field textarea {
+      min-height: 8rem;
+      resize: vertical;
+    }
+
+    .task-field input:focus-visible,
+    .task-field textarea:focus-visible {
+      border-color: var(--coral);
+      outline: 2px solid rgba(255, 120, 98, .2);
+      outline-offset: 2px;
+    }
+
+    .task-actions {
+      display: flex;
+      grid-column: 1 / -1;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .task-submit {
+      padding: .8rem 1.2rem;
+      border: 1px solid var(--coral);
+      border-radius: 999px;
+      color: var(--fundo);
+      background: var(--coral);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .task-submit:disabled {
+      cursor: wait;
+      opacity: .6;
+    }
+
+    .task-message {
+      min-height: 1.2rem;
+      margin: 0;
+      color: var(--suave);
+      font-size: .75rem;
+    }
+
+    .task-message.error { color: #f4d18b; }
+    .task-message.success { color: #a9d8ba; }
 
     .milestones {
       display: grid;
@@ -563,6 +807,7 @@
 
     @media (max-width: 850px) {
       .section-heading { grid-template-columns: 1fr; }
+      .agenda-layout { grid-template-columns: 1fr; }
       .delivery-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .delivery-main { grid-column: 1 / -1; }
       .document-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -578,6 +823,9 @@
       .delivery-main { grid-column: auto; }
       .document-grid { grid-template-columns: 1fr; }
       .milestones li { grid-template-columns: 1fr; gap: .3rem; }
+      .task-form { grid-template-columns: 1fr; }
+      .task-field.full { grid-column: auto; }
+      .task-actions { grid-column: auto; align-items: stretch; flex-direction: column; }
       footer { flex-direction: column; gap: .35rem; }
     }
 
@@ -593,9 +841,9 @@
       <p class="eyebrow">A Floresta que Fala · Uso interno</p>
       <h1 id="titulo-acesso">Área de Produção</h1>
       <p class="access-description">Selecione seu nome e informe sua senha para acessar a central de acompanhamento do projeto.</p>
-      <form id="access-form">
-        <label for="access-user">Selecionar usuário</label>
-        <select id="access-user" name="usuario" required>
+      <form id="formLogin">
+        <label for="projetoSelect">Selecionar usuário</label>
+        <select id="projetoSelect" name="usuario" required>
           <option value="">Selecione seu nome</option>
           <option value="Caio">Caio</option>
           <option value="Ricardo">Ricardo</option>
@@ -619,65 +867,91 @@
       <p class="header-copy">Esta página reúne informações essenciais para orientar a equipe sobre prazos, entregas, documentos e próximos passos.</p>
     </div>
     <div class="header-actions">
-      <p class="access-registered" id="access-registered"></p>
-      <button class="change-user" id="change-user" type="button">Trocar usuário</button>
+      <p class="access-registered" id="usuarioLogado"></p>
+      <button class="change-user" id="btnSair" type="button">Trocar usuário</button>
       <a class="back-link" href="projeto.html">Voltar ao projeto</a>
     </div>
   </header>
 
   <main tabindex="-1">
-    <section aria-labelledby="titulo-calendario">
+    <section class="dashboard-panel" aria-labelledby="titulo-dashboard">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Painel de produção</p>
+          <h2 id="titulo-dashboard">Resumo do projeto</h2>
+        </div>
+        <p>Dados extraídos das páginas da planilha <strong>06_agenda</strong> e <strong>tarefas_registro</strong>.</p>
+      </div>
+      <div class="dashboard-grid" id="dashboardGrid">
+        <article class="dashboard-card">
+          <p class="dashboard-card-label">Compromissos na agenda</p>
+          <strong class="dashboard-card-value" id="dashboardAgendaTotal">—</strong>
+        </article>
+        <article class="dashboard-card">
+          <p class="dashboard-card-label">Tarefas registradas</p>
+          <strong class="dashboard-card-value" id="dashboardTarefasTotal">—</strong>
+        </article>
+        <article class="dashboard-card dashboard-card-large">
+          <p class="dashboard-card-label">Próximo compromisso</p>
+          <div id="dashboardNextAgenda">Nenhum registro disponível.</div>
+        </article>
+        <article class="dashboard-card dashboard-card-large">
+          <p class="dashboard-card-label">Últimas tarefas</p>
+          <ul class="dashboard-task-list" id="dashboardLatestTasks">
+            <li>Nenhuma tarefa registrada.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="agenda-section" aria-labelledby="titulo-calendario">
       <div class="section-heading">
         <div>
           <p class="section-label">Visão do mês</p>
           <h2 id="titulo-calendario">Calendário de Produção</h2>
         </div>
-        <p>Uma leitura simples dos encontros, entregas e pontos de atenção mais próximos.</p>
+        <p>Registre e acompanhe os compromissos oficiais do projeto.</p>
       </div>
 
-      <div class="calendar">
-        <div class="calendar-top">
-          <h3>Julho de 2026</h3>
-          <span>Eventos demonstrativos</span>
-        </div>
-        <div class="calendar-grid" aria-label="Calendário de julho de 2026">
-          <div class="weekday">Dom</div><div class="weekday">Seg</div><div class="weekday">Ter</div><div class="weekday">Qua</div><div class="weekday">Qui</div><div class="weekday">Sex</div><div class="weekday">Sáb</div>
-          <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
-          <div class="day"><span class="day-number">1</span></div>
-          <div class="day"><span class="day-number">2</span></div>
-          <div class="day"><span class="day-number">3</span></div>
-          <div class="day"><span class="day-number">4</span></div>
-          <div class="day"><span class="day-number">5</span></div>
-          <div class="day important"><span class="day-number">6</span><span class="calendar-event">Atualização do site</span></div>
-          <div class="day"><span class="day-number">7</span></div>
-          <div class="day"><span class="day-number">8</span></div>
-          <div class="day important"><span class="day-number">9</span><span class="calendar-event">Reunião com a cooperativa</span></div>
-          <div class="day"><span class="day-number">10</span></div>
-          <div class="day"><span class="day-number">11</span></div>
-          <div class="day"><span class="day-number">12</span></div>
-          <div class="day"><span class="day-number">13</span></div>
-          <div class="day important"><span class="day-number">14</span><span class="calendar-event">Entrega de relatório</span></div>
-          <div class="day"><span class="day-number">15</span></div>
-          <div class="day"><span class="day-number">16</span></div>
-          <div class="day"><span class="day-number">17</span></div>
-          <div class="day"><span class="day-number">18</span></div>
-          <div class="day"><span class="day-number">19</span></div>
-          <div class="day important"><span class="day-number">20</span><span class="calendar-event">Revisão jurídica</span></div>
-          <div class="day"><span class="day-number">21</span></div>
-          <div class="day"><span class="day-number">22</span></div>
-          <div class="day"><span class="day-number">23</span></div>
-          <div class="day"><span class="day-number">24</span></div>
-          <div class="day"><span class="day-number">25</span></div>
-          <div class="day"><span class="day-number">26</span></div>
-          <div class="day important"><span class="day-number">27</span><span class="calendar-event">Marco temporal</span></div>
-          <div class="day"><span class="day-number">28</span></div>
-          <div class="day"><span class="day-number">29</span></div>
-          <div class="day"><span class="day-number">30</span></div>
-          <div class="day"><span class="day-number">31</span></div>
-          <div class="day empty"></div>
-        </div>
+      <div class="agenda-layout">
+        <section class="agenda-form" aria-labelledby="titulo-agenda-form">
+          <h3 id="titulo-agenda-form">Registrar na agenda</h3>
+          <div class="agenda-fields">
+            <label class="sr-only" for="agendaNome">Nome</label>
+            <input id="agendaNome" placeholder="Nome" autocomplete="name">
+            <label class="sr-only" for="agendaData">Data</label>
+            <input id="agendaData" type="date">
+            <label class="sr-only" for="agendaHora">Hora</label>
+            <input id="agendaHora" type="time">
+            <label class="sr-only" for="agendaTitulo">Título</label>
+            <input id="agendaTitulo" placeholder="Título">
+            <label class="sr-only" for="agendaDescricao">Descrição</label>
+            <textarea id="agendaDescricao" placeholder="Descrição"></textarea>
+            <button class="agenda-submit" id="agendaSubmit" type="button" onclick="registrarNaAgenda()">Registrar</button>
+          </div>
+          <p class="agenda-status" id="agendaStatus" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="agenda-lista" aria-labelledby="titulo-agenda-lista">
+          <h3 id="titulo-agenda-lista">Marcações registradas</h3>
+          <div class="agenda-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Hora</th>
+                  <th>Nome</th>
+                  <th>Título</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody id="agendaTabela">
+                <tr><td class="agenda-empty" colspan="5">A carregar a agenda oficial...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
-      <p class="calendar-note">Datas e eventos apresentados como referência visual. Confirmar antes do uso operacional.</p>
     </section>
 
     <section aria-labelledby="titulo-entregas">
@@ -723,6 +997,53 @@
       </div>
     </section>
 
+    <section aria-labelledby="titulo-registro-tarefa">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Gestão da equipe</p>
+          <h2 id="titulo-registro-tarefa">Registrar tarefa</h2>
+        </div>
+        <p>Os dados serão enviados para a página “tarefas_registro” da planilha de gestão do projeto.</p>
+      </div>
+
+      <form class="task-form" id="task-form">
+        <div class="task-field full">
+          <label for="task-name">Tarefa</label>
+          <input id="task-name" name="tarefa" type="text" maxlength="300" required>
+        </div>
+        <div class="task-field">
+          <label for="task-sector">Setor</label>
+          <input id="task-sector" name="setor" type="text" list="task-sector-options" maxlength="100" required>
+          <datalist id="task-sector-options">
+            <option value="Produção">
+            <option value="Artístico">
+            <option value="Técnico">
+            <option value="Comunicação">
+            <option value="Administrativo">
+            <option value="Jurídico">
+          </datalist>
+        </div>
+        <div class="task-field">
+          <label for="task-stage">Etapa</label>
+          <input id="task-stage" name="etapa" type="text" list="task-stage-options" maxlength="100" required>
+          <datalist id="task-stage-options">
+            <option value="Pré-produção">
+            <option value="Produção">
+            <option value="Execução">
+            <option value="Pós-produção">
+          </datalist>
+        </div>
+        <div class="task-field full">
+          <label for="task-notes">Observação</label>
+          <textarea id="task-notes" name="observacao" maxlength="2000"></textarea>
+        </div>
+        <div class="task-actions">
+          <button class="task-submit" id="task-submit" type="submit">Registrar tarefa</button>
+          <p class="task-message" id="task-message" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
     <section aria-labelledby="titulo-marcos">
       <div class="section-heading">
         <div>
@@ -733,7 +1054,7 @@
           <p>Cada marco temporal registra uma versão importante do desenvolvimento do projeto para fins administrativos, jurídicos e de memória institucional.</p>
           <button
             class="issue-document"
-            id="issue-document"
+            id="btnEmitirDoc"
             type="button"
             data-page-url="viradacultural_bh_2026.html"
             data-page-label="Virada Cultural Belo Horizonte 2026"
@@ -793,17 +1114,17 @@
 
   <script>
     // Este login é apenas identificação interna para registro de acesso. Não substitui autenticação segura.
-    const WEB_APP_URL = "";
+    const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbxrSJEjVUzXHFnlq57DWcXKHmlqTogBCc7jKnuYbCQQNFgt7dAHUb4KXOxPrFlECGHh4w/exec";
     const CURRENT_DOCUMENT_VERSION = "VCBH-2026.001";
-    const USER_STORAGE_KEY = "floresta-producao-usuario";
+    const USER_STORAGE_KEY = "floresta_usuario";
     const ACCESS_LOG_STORAGE_KEY = "floresta-producao-acessos";
-    const AUTH_SESSION_KEY = "floresta-producao-autenticado";
+    const ACCESS_STORAGE_KEY = "floresta_acesso";
     const USER_PASSWORD_HASHES = Object.freeze({
-      "Caio": "6f88572dbb145a0b9cc7b98a4c74312ec28bfdab1b4334bdf42425b1af6f5985",
-      "Ricardo": "a3de53622fa85b86d0de00967a3a147ce11628f8ac3c29a92c9d579c0e2ba1cc",
-      "Fernando": "5a11e3e36f1f198a385d7e32c8b0a0baaea337ce51327eb4d8567aab08c468ea",
-      "João": "8fc8dacbfdf3ccd6d4c64751ed25f0c81e85824e48199b19de509dddfe56186d",
-      "Visitante autorizado": "1b6141f74656230fd23cf52c9946a37e0655f55b6f45bd692c2e6d1df4a225a1"
+      "Caio": "b19262027bd507d12a1f35b81263575bcdd5ed05a22597d9ee6b14720d7acfcc",
+      "Ricardo": "78aa9262f260e721d6be1bd4bececcae08a1c607ed8d1c08b31876c691ad4956",
+      "Fernando": "c4db76adda07c18f734b455761b67d41300320b9c61b4074a253e9d7571d5fb6",
+      "João": "18bdf09e817460ca7b0cb41666ce94c557c0112220f7ddf5574a52b5a803d0d2",
+      "Visitante autorizado": "91ca8fb5b3f32ee8309733e97f2d3d8d739c7c6557427db8d9c4e9a57efa17d2"
     });
 
     function registrarEntrada(usuario, observacao = "") {
@@ -829,10 +1150,11 @@
 
       console.info("Entrada registrada:", registro);
 
-      if (WEB_APP_URL) {
-        fetch(WEB_APP_URL, {
+      if (URL_APPS_SCRIPT) {
+        fetch(URL_APPS_SCRIPT, {
           method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          mode: "cors",
+          headers: { "Content-Type": "application/json;charset=utf-8" },
           body: JSON.stringify(registro)
         }).catch((error) => {
           console.warn("Não foi possível enviar o registro ao Google Apps Script.", error);
@@ -842,17 +1164,22 @@
       return registro;
     }
 
-    const accessForm = document.querySelector("#access-form");
-    const accessUser = document.querySelector("#access-user");
+    const accessForm = document.querySelector("#formLogin");
+    const accessUser = document.querySelector("#projetoSelect");
     const accessPassword = document.querySelector("#access-password");
     const accessMessage = document.querySelector("#access-message");
-    const accessRegistered = document.querySelector("#access-registered");
-    const changeUserButton = document.querySelector("#change-user");
-    const issueDocumentButton = document.querySelector("#issue-document");
+    const accessRegistered = document.querySelector("#usuarioLogado");
+    const changeUserButton = document.querySelector("#btnSair");
+    const btnEmitirDoc = document.querySelector("#btnEmitirDoc");
+    const taskForm = document.querySelector("#task-form");
+    const taskSubmit = document.querySelector("#task-submit");
+    const taskMessage = document.querySelector("#task-message");
 
     const liberarAcesso = (usuario) => {
       document.body.classList.add("access-granted");
       accessRegistered.textContent = `Acesso registrado: ${usuario}`;
+      const agendaNome = document.querySelector("#agendaNome");
+      if (agendaNome && !agendaNome.value) agendaNome.value = usuario;
       document.querySelector("main")?.focus({ preventScroll: true });
     };
 
@@ -875,8 +1202,17 @@
         return;
       }
 
-      const passwordHash = await hashPassword(senha);
-      if (USER_PASSWORD_HASHES[usuario] !== passwordHash) {
+      let senhaValida = false;
+
+      if (USER_PASSWORD_HASHES[usuario]) {
+        try {
+          senhaValida = USER_PASSWORD_HASHES[usuario] === await hashPassword(senha);
+        } catch (error) {
+          console.warn("A validação da senha individual não está disponível neste navegador.", error);
+        }
+      }
+
+      if (!senhaValida) {
         accessMessage.textContent = "Usuário ou senha incorretos.";
         accessPassword.value = "";
         accessPassword.focus();
@@ -885,7 +1221,7 @@
 
       try {
         localStorage.setItem(USER_STORAGE_KEY, usuario);
-        sessionStorage.setItem(AUTH_SESSION_KEY, "true");
+        localStorage.setItem(ACCESS_STORAGE_KEY, "permitido");
       } catch (error) {
         console.warn("Não foi possível manter a sessão neste navegador.", error);
       }
@@ -896,32 +1232,217 @@
       liberarAcesso(usuario);
     });
 
-    changeUserButton.addEventListener("click", () => {
-      try {
-        localStorage.removeItem(USER_STORAGE_KEY);
-        sessionStorage.removeItem(AUTH_SESSION_KEY);
-      } catch (error) {
-        console.warn("Não foi possível remover o usuário salvo.", error);
-      }
+    // A área de produção exige nova autenticação a cada abertura da página.
+    try {
+      localStorage.removeItem(USER_STORAGE_KEY);
+      localStorage.removeItem(ACCESS_STORAGE_KEY);
+    } catch (error) {
+      console.warn("Não foi possível limpar o acesso anterior.", error);
+    }
 
+    window.addEventListener("pageshow", (event) => {
+      if (!event.persisted) return;
+      localStorage.removeItem(USER_STORAGE_KEY);
+      localStorage.removeItem(ACCESS_STORAGE_KEY);
       document.body.classList.remove("access-granted");
       accessRegistered.textContent = "";
       accessUser.value = "";
       accessPassword.value = "";
-      accessMessage.textContent = "";
-      accessUser.focus();
     });
 
-    try {
-      const savedUser = localStorage.getItem(USER_STORAGE_KEY);
-      const authenticatedSession = sessionStorage.getItem(AUTH_SESSION_KEY) === "true";
-      if (savedUser && authenticatedSession && USER_PASSWORD_HASHES[savedUser]) {
-        registrarEntrada(savedUser, "Acesso com identificação salva no navegador.");
-        liberarAcesso(savedUser);
+    changeUserButton.addEventListener("click", () => {
+      localStorage.removeItem(USER_STORAGE_KEY);
+      localStorage.removeItem(ACCESS_STORAGE_KEY);
+      window.location.reload();
+    });
+
+    taskForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      taskMessage.className = "task-message";
+
+      if (!taskForm.reportValidity()) return;
+
+      if (!URL_APPS_SCRIPT) {
+        taskMessage.textContent = "Integração ainda não configurada: informe a URL publicada do Google Apps Script em URL_APPS_SCRIPT.";
+        taskMessage.classList.add("error");
+        return;
       }
-    } catch (error) {
-      console.warn("Não foi possível consultar o usuário salvo.", error);
+
+      const formData = new FormData(taskForm);
+      const payload = {
+        acao: "registrar_tarefa",
+        planilha: "gestao_site_a_floresta_que_fala",
+        pagina: "tarefas_registro",
+        tarefa: formData.get("tarefa").trim(),
+        setor: formData.get("setor").trim(),
+        etapa: formData.get("etapa").trim(),
+        observacao: formData.get("observacao").trim(),
+        usuario: localStorage.getItem(USER_STORAGE_KEY) || "Usuário não identificado",
+        registradoEm: new Date().toISOString()
+      };
+
+      taskSubmit.disabled = true;
+      taskMessage.textContent = "Registrando tarefa…";
+
+      try {
+        await fetch(URL_APPS_SCRIPT, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        taskForm.reset();
+        taskMessage.textContent = "Tarefa enviada para registro.";
+        taskMessage.classList.add("success");
+      } catch (error) {
+        console.error("Não foi possível registrar a tarefa.", error);
+        taskMessage.textContent = "Não foi possível enviar a tarefa. Verifique a conexão e tente novamente.";
+        taskMessage.classList.add("error");
+      } finally {
+        taskSubmit.disabled = false;
+      }
+    });
+
+    async function registrarNaAgenda() {
+      const status = document.querySelector("#agendaStatus");
+      const submit = document.querySelector("#agendaSubmit");
+      const dados = {
+        acao: "registrarAgenda",
+        nome: document.querySelector("#agendaNome").value.trim(),
+        data: document.querySelector("#agendaData").value,
+        hora: document.querySelector("#agendaHora").value,
+        titulo: document.querySelector("#agendaTitulo").value.trim(),
+        descricao: document.querySelector("#agendaDescricao").value.trim()
+      };
+
+      if (!dados.nome || !dados.data || !dados.hora || !dados.titulo) {
+        status.textContent = "Preencha nome, data, hora e título.";
+        return;
+      }
+
+      submit.disabled = true;
+      status.textContent = "Registrando...";
+
+      try {
+        await fetch(URL_APPS_SCRIPT, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json;charset=utf-8" },
+          body: JSON.stringify(dados)
+        });
+        status.textContent = "Registro enviado para a agenda.";
+        document.querySelector("#agendaTitulo").value = "";
+        document.querySelector("#agendaDescricao").value = "";
+        await carregarAgenda();
+      } catch (error) {
+        console.error("Não foi possível registrar na agenda.", error);
+        status.textContent = "Não foi possível enviar o registro.";
+      } finally {
+        submit.disabled = false;
+      }
     }
+
+    async function carregarDashboard() {
+      const summary = document.querySelector("#dashboardGrid");
+      const agendaTotal = document.querySelector("#dashboardAgendaTotal");
+      const tarefasTotal = document.querySelector("#dashboardTarefasTotal");
+      const nextAgenda = document.querySelector("#dashboardNextAgenda");
+      const latestTasks = document.querySelector("#dashboardLatestTasks");
+
+      try {
+        const resposta = await fetch(`${URL_APPS_SCRIPT}?acao=dashboardResumo`, { cache: "no-store", mode: "cors" });
+        if (!resposta.ok) {
+          const texto = await resposta.text();
+          throw new Error(`Falha ao carregar o dashboard: ${resposta.status} ${texto}`);
+        }
+
+        const resumo = await resposta.json();
+        agendaTotal.textContent = String(resumo.totalAgenda ?? 0);
+        tarefasTotal.textContent = String(resumo.totalTarefas ?? 0);
+
+        if (resumo.nextAgenda) {
+          nextAgenda.innerHTML = `
+            <strong>${resumo.nextAgenda.titulo || "Sem título"}</strong><br>
+            ${resumo.nextAgenda.data || "-"} ${resumo.nextAgenda.hora || ""}<br>
+            ${resumo.nextAgenda.nome || "-"}
+          `;
+        } else {
+          nextAgenda.textContent = "Nenhum compromisso futuro registrado.";
+        }
+
+        latestTasks.replaceChildren();
+        if (Array.isArray(resumo.latestTasks) && resumo.latestTasks.length) {
+          resumo.latestTasks.forEach((task) => {
+            const item = document.createElement("li");
+            item.textContent = `${task.tarefa || "[Sem título]"} — ${task.etapa || "sem etapa"}`;
+            latestTasks.appendChild(item);
+          });
+        } else {
+          const item = document.createElement("li");
+          item.textContent = "Nenhuma tarefa recente.";
+          latestTasks.appendChild(item);
+        }
+      } catch (error) {
+        console.error("Não foi possível carregar o dashboard.", error);
+        agendaTotal.textContent = "0";
+        tarefasTotal.textContent = "0";
+        nextAgenda.textContent = "Dashboard temporariamente indisponível.";
+        latestTasks.replaceChildren();
+        const item = document.createElement("li");
+        item.textContent = "Não foi possível carregar tarefas.";
+        latestTasks.appendChild(item);
+      }
+    }
+
+    async function carregarAgenda() {
+      const tabela = document.querySelector("#agendaTabela");
+      tabela.replaceChildren();
+
+      const estado = document.createElement("tr");
+      const mensagem = document.createElement("td");
+      mensagem.className = "agenda-empty";
+      mensagem.colSpan = 5;
+      mensagem.textContent = "A carregar a agenda oficial...";
+      estado.appendChild(mensagem);
+      tabela.appendChild(estado);
+
+      try {
+        const resposta = await fetch(`${URL_APPS_SCRIPT}?acao=listarAgenda`, { cache: "no-store", mode: "cors" });
+        if (!resposta.ok) {
+          const texto = await resposta.text();
+          throw new Error(`Falha ao carregar a agenda: ${resposta.status} ${texto}`);
+        }
+
+        const agenda = await resposta.json();
+        if (!Array.isArray(agenda)) throw new Error("A API da agenda não retornou uma lista.");
+
+        tabela.replaceChildren();
+        if (!agenda.length) {
+          mensagem.textContent = "Nenhuma marcação registrada.";
+          tabela.appendChild(estado);
+          return;
+        }
+
+        agenda.forEach((item) => {
+          const linha = document.createElement("tr");
+          ["data", "hora", "nome", "titulo", "descricao"].forEach((campo) => {
+            const celula = document.createElement("td");
+            celula.textContent = item[campo] ?? "";
+            linha.appendChild(celula);
+          });
+          tabela.appendChild(linha);
+        });
+      } catch (error) {
+        console.error("Não foi possível carregar a agenda.", error);
+        mensagem.textContent = "Agenda temporariamente indisponível.";
+        tabela.replaceChildren(estado);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      carregarDashboard();
+      carregarAgenda();
+    });
 
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
       "&": "&amp;",
@@ -962,7 +1483,7 @@
         }
       });
 
-      sourceDocument.querySelectorAll("script, nav, button, .site-header, .skip-link, .record-mode-button, .document-metadata, .document-declaration").forEach((item) => {
+      sourceDocument.querySelectorAll("script, nav, button, .site-header, .skip-link, .record-mode-button, .document-metadata, .document-declaration, .agenda-form").forEach((item) => {
         item.remove();
       });
 
@@ -994,6 +1515,16 @@
 
       try {
         const sourceUrl = new URL(pageUrl, window.location.href);
+
+        // Navegadores bloqueiam fetch() entre arquivos locais (file://). Nesse
+        // caso, a própria página de destino prepara todos os elementos e abre
+        // a caixa de impressão por meio do parâmetro abaixo.
+        if (sourceUrl.protocol === "file:") {
+          sourceUrl.searchParams.set("imprimir", "1");
+          documentWindow.location.replace(sourceUrl.href);
+          return;
+        }
+
         const response = await fetch(sourceUrl, { cache: "no-store" });
         if (!response.ok) throw new Error(`Falha ao carregar a página: ${response.status}`);
 
@@ -1101,6 +1632,7 @@
                 <h2>Declaração</h2>
                 <p>O presente documento representa fielmente o estado desta página na data de emissão, constituindo registro cronológico do desenvolvimento do projeto.</p>
                 <p>Este documento destina-se ao arquivamento administrativo e jurídico junto à Cooperativa dos Empreendedores de Belo Horizonte.</p>
+                <p><strong>Caio Rodrigues</strong><br>Diretor</p>
                 ${futureIntegrityFields}
               </section>
             </main>
@@ -1122,21 +1654,48 @@
         window.setTimeout(() => documentWindow.print(), 500);
       } catch (error) {
         console.error("Não foi possível emitir o registro documental.", error);
-        documentWindow.document.body.innerHTML = `
-          <p style="font-family:Arial;padding:2rem">
-            Não foi possível preparar o registro documental. Verifique se a página está disponível e tente novamente.
-          </p>
-        `;
+        const fallbackUrl = new URL(pageUrl, window.location.href);
+        fallbackUrl.searchParams.set("imprimir", "1");
+        documentWindow.location.replace(fallbackUrl.href);
       }
     }
 
-    issueDocumentButton.addEventListener("click", () => {
-      const usuario = localStorage.getItem(USER_STORAGE_KEY) || "Usuário não identificado";
+    // Envio do Registro Administrativo para a Planilha do Google.
+    // O mesmo clique continua emitindo o PDF, preservando o fluxo existente.
+    btnEmitirDoc.addEventListener("click", async () => {
+      const usuarioAtual = localStorage.getItem("floresta_usuario") || "Desconhecido";
+
       emitirRegistroDocumental(
-        issueDocumentButton.dataset.pageUrl,
-        issueDocumentButton.dataset.pageLabel,
-        usuario
+        btnEmitirDoc.dataset.pageUrl,
+        btnEmitirDoc.dataset.pageLabel,
+        usuarioAtual
       );
+
+      const textoOriginal = btnEmitirDoc.innerHTML;
+      btnEmitirDoc.disabled = true;
+      btnEmitirDoc.innerText = "A registrar na planilha...";
+
+      const payload = {
+        usuario: usuarioAtual,
+        acao: "Emissão de Documento / Registro Administrativo",
+        detalhes: "Ação executada através do painel central administrativo do site."
+      };
+
+      try {
+        await fetch(URL_APPS_SCRIPT, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        alert("Sucesso! Registado na planilha Google.");
+      } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao ligar à planilha. Verifique a consola do navegador (F12).");
+      } finally {
+        btnEmitirDoc.disabled = false;
+        btnEmitirDoc.innerHTML = textoOriginal;
+      }
     });
 
     document.querySelectorAll('a[href="#"]').forEach((link) => {

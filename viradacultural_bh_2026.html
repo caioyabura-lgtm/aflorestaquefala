@@ -8,12 +8,12 @@
   <title>Caderno de criação — A Floresta que Fala</title>
   <style>
     :root {
-      --floresta-profunda: #071812;
-      --verde-musgo: #123a2a;
-      --roxo-virada: #6b4dbb;
-      --magenta: #e8458b;
-      --coral: #ff7862;
-      --areia: #efe5da;
+      --floresta-profunda: #1E1E1E;
+      --verde-musgo: #2D4A47;
+      --roxo-virada: #A8415B;
+      --magenta: #FB003F;
+      --coral: #00ECD3;
+      --areia: #A8B446;
       --branco: #f9f9f8;
       --linha: rgba(249, 249, 248, .17);
       --largura: 1180px;
@@ -1953,12 +1953,11 @@
 
         <a
           class="report-download"
-          href="./Relatorio_Estado_da_Arte_A_Floresta_que_Fala_Julho_2026.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Baixar relatório Estado da Arte em PDF, abre em nova aba"
+          href="#"
+          aria-disabled="true"
+          aria-label="Relatório Estado da Arte ainda não disponível"
         >
-          Baixar relatório (PDF)
+          PDF em preparação
         </a>
       </article>
     </section>
@@ -2008,12 +2007,11 @@
 
         <a
           class="report-download"
-          href="./Manifesto_ACT_0.1.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Ler Manifesto ACT 0.1 em PDF, abre em nova aba"
+          href="#"
+          aria-disabled="true"
+          aria-label="Manifesto ACT 0.1 ainda não disponível"
         >
-          Ler Manifesto (PDF)
+          PDF em preparação
         </a>
       </article>
     </section>
@@ -2136,6 +2134,7 @@
   <section class="document-declaration record-only" aria-labelledby="titulo-declaracao">
     <h2 id="titulo-declaracao">Declaração</h2>
     <p>O presente documento representa fielmente o estado de desenvolvimento desta página na data indicada, constituindo registro cronológico do processo de pesquisa, criação e desenvolvimento do projeto.</p>
+    <p><strong>Caio Rodrigues</strong><br>Diretor</p>
   </section>
 
   <footer>
@@ -2236,6 +2235,21 @@
       await waitForImages();
       window.print();
     });
+
+    document.querySelectorAll('a[aria-disabled="true"]').forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+
+    if (new URLSearchParams(window.location.search).get("imprimir") === "1") {
+      window.addEventListener("load", async () => {
+        document.querySelectorAll("details").forEach((item) => {
+          item.open = true;
+        });
+        revealItems.forEach((item) => item.classList.add("visible"));
+        await waitForImages();
+        window.setTimeout(() => window.print(), 300);
+      }, { once: true });
+    }
   </script>
 </body>
 </html>
