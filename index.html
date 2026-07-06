@@ -36,23 +36,6 @@
   <div class="scene-shade" aria-hidden="true"></div>
   <div class="fps" id="fps" hidden>0 FPS</div>
 
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Ir para a abertura do site">
-      A Floresta que Fala
-    </a>
-
-    <nav aria-label="Navegação principal">
-      <a href="index.html">Início</a>
-      <a href="apresentacao.html">Apresentação</a>
-      <a href="dramaturgia.html">Dramaturgia</a>
-      <a href="sonorizacao.html">Sonorização</a>
-      <a href="equipe.html">Equipe</a>
-      <a href="orcamento.html">Orçamento</a>
-      <a href="cronograma.html">Cronograma</a>
-      <a href="edital.html">Edital</a>
-    </nav>
-  </header>
-
   <div class="page-dots" aria-label="Navegação das seções">
     <button class="dot active" type="button" data-page="0" aria-label="Ir para abertura"></button>
     <button class="dot" type="button" data-page="1" aria-label="Ir para visão geral"></button>
@@ -74,11 +57,9 @@
         </p>
 
         <a
-          class="enter-button is-disabled"
+          class="enter-button ready"
           id="enter-button"
-          href="projeto.html"
-          aria-disabled="true"
-          tabindex="-1"
+          href="./projeto.html"
         >
           Entrar
         </a>
@@ -150,6 +131,36 @@
     </p>
   </noscript>
 
+  <script>
+    // Mantém a entrada acessível mesmo quando WebGL, o modelo 3D ou os módulos
+    // externos não carregam (situação comum ao abrir o HTML via file://).
+    (() => {
+      const delay = location.protocol === "file:" ? 1200 : 4000;
+      const loadingScreen = document.querySelector("#loading-screen");
+      const enterButton = document.querySelector("#enter-button");
+
+      enterButton?.addEventListener("click", event => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        window.location.assign(new URL("projeto.html", window.location.href));
+      });
+
+      const releasePage = () => {
+        loadingScreen?.classList.add("done");
+        loadingScreen?.setAttribute("aria-hidden", "true");
+        enterButton?.classList.add("ready");
+        enterButton?.removeAttribute("aria-disabled");
+        enterButton?.removeAttribute("tabindex");
+      };
+
+      window.setTimeout(releasePage, delay);
+
+      // O cache de navegação pode restaurar a tela de carregamento sobre o link.
+      window.addEventListener("pageshow", event => {
+        if (event.persisted) releasePage();
+      });
+    })();
+  </script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ export function createLoadingController() {
     screen.classList.add("done");
     button.classList.add("ready");
     button.removeAttribute("aria-disabled");
+    button.removeAttribute("tabindex");
   }
   return { manager, finish };
 }

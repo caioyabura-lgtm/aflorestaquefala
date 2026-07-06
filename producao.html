@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071812">
+  <meta name="description" content="Central de acompanhamento administrativo do projeto A Floresta que Fala.">
+  <title>Produção — A Floresta que Fala</title>
+  <style>
+    :root {
+      --fundo: #071812;
+      --painel: rgba(249, 249, 248, .035);
+      --painel-forte: rgba(18, 58, 42, .54);
+      --texto: #f9f9f8;
+      --suave: rgba(249, 249, 248, .64);
+      --discreto: rgba(249, 249, 248, .4);
+      --linha: rgba(249, 249, 248, .15);
+      --coral: #ff7862;
+      --areia: #efe5da;
+      --verde-claro: #8fc9a6;
+      --largura: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at 85% 5%, rgba(107, 77, 187, .1), transparent 25rem),
+        var(--fundo);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    body:not(.access-granted) > .site-header,
+    body:not(.access-granted) > main,
+    body:not(.access-granted) > footer {
+      display: none;
+    }
+
+    .access-screen {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: grid;
+      overflow-y: auto;
+      place-items: center;
+      padding: 1.5rem;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(107, 77, 187, .1), transparent 22rem),
+        var(--fundo);
+    }
+
+    body.access-granted .access-screen {
+      display: none;
+    }
+
+    .access-box {
+      width: min(27rem, 100%);
+      padding: clamp(1.75rem, 5vw, 3rem);
+      border: 1px solid var(--linha);
+      border-radius: 1.5rem .35rem;
+      background: rgba(249, 249, 248, .035);
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .18);
+    }
+
+    .access-box h1 {
+      font-size: clamp(2.4rem, 8vw, 4rem);
+      line-height: .92;
+    }
+
+    .access-description {
+      margin: 1.25rem 0 2rem;
+      color: var(--suave);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .access-box label {
+      display: block;
+      margin-bottom: .5rem;
+      color: var(--discreto);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .access-box select,
+    .access-box input {
+      width: 100%;
+      padding: .85rem 2.5rem .85rem .9rem;
+      border: 1px solid var(--linha);
+      border-radius: .5rem;
+      color: var(--texto);
+      background: var(--fundo);
+      font: inherit;
+    }
+
+    .access-box input {
+      margin-top: .9rem;
+      padding-right: .9rem;
+    }
+
+    .access-box select:focus-visible,
+    .access-box input:focus-visible {
+      border-color: var(--coral);
+      outline: 2px solid rgba(255, 120, 98, .2);
+      outline-offset: 2px;
+    }
+
+    .access-submit {
+      width: 100%;
+      margin-top: 1rem;
+      padding: .85rem 1rem;
+      border: 1px solid rgba(255, 120, 98, .5);
+      border-radius: 999px;
+      color: var(--fundo);
+      background: var(--coral);
+      cursor: pointer;
+      font-weight: 700;
+      transition: filter .25s ease, transform .25s ease;
+    }
+
+    .access-submit:hover,
+    .access-submit:focus-visible {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .access-message {
+      min-height: 1.2rem;
+      margin: .75rem 0 0;
+      color: #f4d18b;
+      font-size: .72rem;
+    }
+
+    .site-header,
+    main,
+    footer {
+      width: min(var(--largura), calc(100% - 3rem));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: clamp(3rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+      border-bottom: 1px solid var(--linha);
+    }
+
+    .eyebrow,
+    .section-label {
+      margin: 0 0 .8rem;
+      color: var(--coral);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      letter-spacing: -.07em;
+      line-height: .85;
+    }
+
+    .subtitle {
+      margin: 1.5rem 0 .65rem;
+      color: var(--areia);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+    }
+
+    .header-copy {
+      max-width: 44rem;
+      margin: 0;
+      color: var(--suave);
+    }
+
+    .back-link {
+      flex: 0 0 auto;
+      padding: .65rem .9rem;
+      border: 1px solid var(--linha);
+      border-radius: 999px;
+      color: var(--suave);
+      text-decoration: none;
+      font-size: .7rem;
+      letter-spacing: .06em;
+      transition: color .25s ease, border-color .25s ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--texto);
+      border-color: rgba(255, 120, 98, .5);
+    }
+
+    .header-actions {
+      display: grid;
+      flex: 0 0 auto;
+      justify-items: end;
+      gap: .65rem;
+    }
+
+    .access-registered {
+      margin: 0;
+      color: var(--discreto);
+      font-size: .65rem;
+      letter-spacing: .04em;
+    }
+
+    .change-user {
+      padding: 0;
+      border: 0;
+      color: var(--coral);
+      background: transparent;
+      cursor: pointer;
+      font-size: .67rem;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: .25rem;
+    }
+
+    .change-user:hover,
+    .change-user:focus-visible {
+      text-decoration-color: currentColor;
+    }
+
+    main {
+      padding-bottom: clamp(4rem, 9vw, 8rem);
+    }
+
+    section {
+      padding-top: clamp(4rem, 9vw, 7rem);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, .6fr);
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -.055em;
+      line-height: .95;
+    }
+
+    .section-heading > p {
+      margin: 0;
+      color: var(--suave);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .record-actions {
+      display: grid;
+      justify-items: start;
+      gap: 1rem;
+    }
+
+    .record-actions p {
+      margin: 0;
+      color: var(--suave);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .issue-document {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .7rem .9rem;
+      border: 1px solid var(--coral);
+      border-radius: 999px;
+      color: var(--fundo);
+      background: var(--coral);
+      box-shadow: 0 .65rem 1.6rem rgba(255, 120, 98, .14);
+      cursor: pointer;
+      font-size: .67rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      transition: border-color .25s ease, background .25s ease;
+    }
+
+    .issue-document:hover,
+    .issue-document:focus-visible {
+      border-color: var(--areia);
+      background: var(--areia);
+    }
+
+    .issue-document svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .calendar {
+      overflow: hidden;
+      border: 1px solid var(--linha);
+      border-radius: 1.5rem .35rem;
+      background: var(--painel);
+    }
+
+    .calendar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem;
+      border-bottom: 1px solid var(--linha);
+    }
+
+    .calendar-top h3 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .calendar-top span {
+      color: var(--discreto);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .weekday,
+    .day {
+      min-width: 0;
+      border-right: 1px solid var(--linha);
+      border-bottom: 1px solid var(--linha);
+    }
+
+    .weekday:nth-child(7n),
+    .day:nth-child(7n) {
+      border-right: 0;
+    }
+
+    .weekday {
+      padding: .65rem .4rem;
+      color: var(--discreto);
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .day {
+      min-height: 7.25rem;
+      padding: .65rem;
+    }
+
+    .day.empty {
+      background: rgba(0, 0, 0, .08);
+    }
+
+    .day-number {
+      display: grid;
+      width: 1.65rem;
+      aspect-ratio: 1;
+      place-items: center;
+      color: var(--suave);
+      font-size: .72rem;
+    }
+
+    .day.important .day-number {
+      border-radius: 50%;
+      color: var(--fundo);
+      background: var(--coral);
+      font-weight: 700;
+    }
+
+    .calendar-event {
+      display: block;
+      margin-top: .45rem;
+      padding: .35rem .4rem;
+      border-left: 2px solid var(--verde-claro);
+      color: rgba(249, 249, 248, .76);
+      background: rgba(143, 201, 166, .08);
+      font-size: .62rem;
+      line-height: 1.3;
+    }
+
+    .calendar-note {
+      margin: 1rem 0 0;
+      color: var(--discreto);
+      font-size: .7rem;
+    }
+
+    .delivery-list {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .delivery-card {
+      display: grid;
+      grid-template-columns: minmax(13rem, 1.2fr) minmax(8rem, .7fr) repeat(2, minmax(8rem, .8fr));
+      align-items: center;
+      gap: 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid var(--linha);
+      border-radius: .9rem .2rem;
+      background: var(--painel);
+      transition: border-color .3s ease, transform .3s ease;
+    }
+
+    .delivery-card:hover {
+      border-color: rgba(255, 120, 98, .28);
+      transform: translateY(-2px);
+    }
+
+    .delivery-card h3 {
+      margin: 0 0 .3rem;
+      font-size: .95rem;
+    }
+
+    .delivery-card p {
+      margin: 0;
+      color: var(--discreto);
+      font-size: .72rem;
+    }
+
+    .data-label {
+      display: block;
+      margin-bottom: .2rem;
+      color: var(--discreto);
+      font-size: .57rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .data-value {
+      color: var(--suave);
+      font-size: .75rem;
+    }
+
+    .status {
+      display: inline-flex;
+      width: fit-content;
+      padding: .35rem .55rem;
+      border: 1px solid var(--linha);
+      border-radius: 999px;
+      color: var(--suave);
+      font-size: .62rem;
+      letter-spacing: .04em;
+    }
+
+    .status.progress { color: #f4d18b; border-color: rgba(244, 209, 139, .3); }
+    .status.sent { color: #a8cfed; border-color: rgba(168, 207, 237, .3); }
+    .status.waiting { color: #d8b5ed; border-color: rgba(216, 181, 237, .3); }
+    .status.done { color: #a9d8ba; border-color: rgba(169, 216, 186, .3); }
+
+    .milestones {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--linha);
+      list-style: none;
+    }
+
+    .milestones li {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--linha);
+      color: var(--suave);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .milestones strong {
+      color: var(--coral);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .72rem;
+      letter-spacing: .04em;
+    }
+
+    .document-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .75rem;
+    }
+
+    .document-card {
+      display: flex;
+      min-height: 9rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.2rem;
+      border: 1px solid var(--linha);
+      border-radius: .9rem .2rem;
+      background: var(--painel);
+    }
+
+    .document-card h3 {
+      margin: 0;
+      font-size: .9rem;
+    }
+
+    .document-link {
+      color: var(--coral);
+      font-size: .68rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .document-link:hover,
+    .document-link:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: .25rem;
+    }
+
+    .notes-block {
+      min-height: 13rem;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border: 1px solid var(--linha);
+      border-radius: .35rem 1.5rem;
+      color: var(--discreto);
+      background:
+        linear-gradient(var(--painel-forte), var(--painel-forte)),
+        repeating-linear-gradient(transparent 0 2.3rem, rgba(249, 249, 248, .06) 2.3rem calc(2.3rem + 1px));
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--linha);
+      color: var(--discreto);
+      font-size: .65rem;
+      letter-spacing: .07em;
+    }
+
+    @media (max-width: 850px) {
+      .section-heading { grid-template-columns: 1fr; }
+      .delivery-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .delivery-main { grid-column: 1 / -1; }
+      .document-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .day { min-height: 6rem; padding: .45rem; }
+    }
+
+    @media (max-width: 580px) {
+      .site-header { flex-direction: column-reverse; }
+      .header-actions { justify-items: start; }
+      .calendar { overflow-x: auto; }
+      .calendar-grid { min-width: 42rem; }
+      .delivery-card { grid-template-columns: 1fr; }
+      .delivery-main { grid-column: auto; }
+      .document-grid { grid-template-columns: 1fr; }
+      .milestones li { grid-template-columns: 1fr; gap: .3rem; }
+      footer { flex-direction: column; gap: .35rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <section class="access-screen" id="access-screen" aria-labelledby="titulo-acesso">
+    <div class="access-box">
+      <p class="eyebrow">A Floresta que Fala · Uso interno</p>
+      <h1 id="titulo-acesso">Área de Produção</h1>
+      <p class="access-description">Selecione seu nome e informe sua senha para acessar a central de acompanhamento do projeto.</p>
+      <form id="access-form">
+        <label for="access-user">Selecionar usuário</label>
+        <select id="access-user" name="usuario" required>
+          <option value="">Selecione seu nome</option>
+          <option value="Caio">Caio</option>
+          <option value="Ricardo">Ricardo</option>
+          <option value="Fernando">Fernando</option>
+          <option value="João">João</option>
+          <option value="Visitante autorizado">Visitante autorizado</option>
+        </select>
+        <label for="access-password" class="sr-only">Senha</label>
+        <input id="access-password" name="senha" type="password" placeholder="Senha" autocomplete="current-password" required>
+        <button class="access-submit" type="submit">Entrar</button>
+        <p class="access-message" id="access-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">A Floresta que Fala · Uso interno</p>
+      <h1>Produção</h1>
+      <p class="subtitle">Central de acompanhamento administrativo do projeto.</p>
+      <p class="header-copy">Esta página reúne informações essenciais para orientar a equipe sobre prazos, entregas, documentos e próximos passos.</p>
+    </div>
+    <div class="header-actions">
+      <p class="access-registered" id="access-registered"></p>
+      <button class="change-user" id="change-user" type="button">Trocar usuário</button>
+      <a class="back-link" href="projeto.html">Voltar ao projeto</a>
+    </div>
+  </header>
+
+  <main tabindex="-1">
+    <section aria-labelledby="titulo-calendario">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Visão do mês</p>
+          <h2 id="titulo-calendario">Calendário de Produção</h2>
+        </div>
+        <p>Uma leitura simples dos encontros, entregas e pontos de atenção mais próximos.</p>
+      </div>
+
+      <div class="calendar">
+        <div class="calendar-top">
+          <h3>Julho de 2026</h3>
+          <span>Eventos demonstrativos</span>
+        </div>
+        <div class="calendar-grid" aria-label="Calendário de julho de 2026">
+          <div class="weekday">Dom</div><div class="weekday">Seg</div><div class="weekday">Ter</div><div class="weekday">Qua</div><div class="weekday">Qui</div><div class="weekday">Sex</div><div class="weekday">Sáb</div>
+          <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
+          <div class="day"><span class="day-number">1</span></div>
+          <div class="day"><span class="day-number">2</span></div>
+          <div class="day"><span class="day-number">3</span></div>
+          <div class="day"><span class="day-number">4</span></div>
+          <div class="day"><span class="day-number">5</span></div>
+          <div class="day important"><span class="day-number">6</span><span class="calendar-event">Atualização do site</span></div>
+          <div class="day"><span class="day-number">7</span></div>
+          <div class="day"><span class="day-number">8</span></div>
+          <div class="day important"><span class="day-number">9</span><span class="calendar-event">Reunião com a cooperativa</span></div>
+          <div class="day"><span class="day-number">10</span></div>
+          <div class="day"><span class="day-number">11</span></div>
+          <div class="day"><span class="day-number">12</span></div>
+          <div class="day"><span class="day-number">13</span></div>
+          <div class="day important"><span class="day-number">14</span><span class="calendar-event">Entrega de relatório</span></div>
+          <div class="day"><span class="day-number">15</span></div>
+          <div class="day"><span class="day-number">16</span></div>
+          <div class="day"><span class="day-number">17</span></div>
+          <div class="day"><span class="day-number">18</span></div>
+          <div class="day"><span class="day-number">19</span></div>
+          <div class="day important"><span class="day-number">20</span><span class="calendar-event">Revisão jurídica</span></div>
+          <div class="day"><span class="day-number">21</span></div>
+          <div class="day"><span class="day-number">22</span></div>
+          <div class="day"><span class="day-number">23</span></div>
+          <div class="day"><span class="day-number">24</span></div>
+          <div class="day"><span class="day-number">25</span></div>
+          <div class="day"><span class="day-number">26</span></div>
+          <div class="day important"><span class="day-number">27</span><span class="calendar-event">Marco temporal</span></div>
+          <div class="day"><span class="day-number">28</span></div>
+          <div class="day"><span class="day-number">29</span></div>
+          <div class="day"><span class="day-number">30</span></div>
+          <div class="day"><span class="day-number">31</span></div>
+          <div class="day empty"></div>
+        </div>
+      </div>
+      <p class="calendar-note">Datas e eventos apresentados como referência visual. Confirmar antes do uso operacional.</p>
+    </section>
+
+    <section aria-labelledby="titulo-entregas">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Acompanhamento</p>
+          <h2 id="titulo-entregas">Próximas entregas</h2>
+        </div>
+        <p>Itens essenciais reunidos em uma leitura única, sem etapas ou campos obrigatórios.</p>
+      </div>
+
+      <div class="delivery-list">
+        <article class="delivery-card">
+          <div class="delivery-main"><h3>Plano técnico preliminar</h3><p>Adequar às condições confirmadas pela produção.</p></div>
+          <span class="status progress">Em andamento</span>
+          <div><span class="data-label">Data prevista</span><span class="data-value">A definir</span></div>
+          <div><span class="data-label">Responsável</span><span class="data-value">A definir</span></div>
+        </article>
+        <article class="delivery-card">
+          <div class="delivery-main"><h3>PDF de registro do site</h3><p>Gerar cópia documental da versão vigente.</p></div>
+          <span class="status">A fazer</span>
+          <div><span class="data-label">Data prevista</span><span class="data-value">A definir</span></div>
+          <div><span class="data-label">Responsável</span><span class="data-value">A definir</span></div>
+        </article>
+        <article class="delivery-card">
+          <div class="delivery-main"><h3>Revisão jurídica</h3><p>Conferir documentos, autorizações e registro.</p></div>
+          <span class="status waiting">Aguardando retorno</span>
+          <div><span class="data-label">Data prevista</span><span class="data-value">A definir</span></div>
+          <div><span class="data-label">Responsável</span><span class="data-value">A definir</span></div>
+        </article>
+        <article class="delivery-card">
+          <div class="delivery-main"><h3>Orçamento consolidado</h3><p>Reunir custos artísticos, técnicos e operacionais.</p></div>
+          <span class="status sent">Enviado</span>
+          <div><span class="data-label">Data prevista</span><span class="data-value">A definir</span></div>
+          <div><span class="data-label">Responsável</span><span class="data-value">A definir</span></div>
+        </article>
+        <article class="delivery-card">
+          <div class="delivery-main"><h3>Cronograma de produção</h3><p>Organizar marcos, dependências e próximos passos.</p></div>
+          <span class="status done">Concluído</span>
+          <div><span class="data-label">Data prevista</span><span class="data-value">A definir</span></div>
+          <div><span class="data-label">Responsável</span><span class="data-value">A definir</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-marcos">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Memória institucional</p>
+          <h2 id="titulo-marcos">Marcos Temporais</h2>
+        </div>
+        <div class="record-actions">
+          <p>Cada marco temporal registra uma versão importante do desenvolvimento do projeto para fins administrativos, jurídicos e de memória institucional.</p>
+          <button
+            class="issue-document"
+            id="issue-document"
+            type="button"
+            data-page-url="viradacultural_bh_2026.html"
+            data-page-label="Virada Cultural Belo Horizonte 2026"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 3H6.75A1.75 1.75 0 0 0 5 4.75v14.5A1.75 1.75 0 0 0 6.75 21h10.5A1.75 1.75 0 0 0 19 19.25V8l-5-5Z"/>
+              <path d="M14 3v5h5M8.5 13h7M8.5 16.5h5"/>
+            </svg>
+            Emitir Registro PDF
+          </button>
+        </div>
+      </div>
+      <ol class="milestones">
+        <li><strong>VCBH-2026.001</strong><span>criação da página da Virada Cultural</span></li>
+        <li><strong>VCBH-2026.002</strong><span>inclusão da pesquisa musical</span></li>
+        <li><strong>VCBH-2026.003</strong><span>inclusão da identidade visual</span></li>
+        <li><strong>VCBH-2026.004</strong><span>implementação do modo registro</span></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="titulo-documentos">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Consulta rápida</p>
+          <h2 id="titulo-documentos">Documentos de Apoio</h2>
+        </div>
+        <p>Um ponto único para localizar os principais materiais administrativos e de pesquisa.</p>
+      </div>
+      <div class="document-grid">
+        <article class="document-card"><h3>Relatório de Estado da Arte</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+        <article class="document-card"><h3>Caderno de Pesquisa 02</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+        <article class="document-card"><h3>Caderno de Pesquisa 03</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+        <article class="document-card"><h3>Plano Técnico</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+        <article class="document-card"><h3>Orçamento</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+        <article class="document-card"><h3>Contratos / Jurídico</h3><a class="document-link" href="#" aria-disabled="true">Abrir documento</a></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-observacoes">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Bloco de apoio</p>
+          <h2 id="titulo-observacoes">Observações</h2>
+        </div>
+        <p>Espaço reservado para anotações de produção, pendências e decisões tomadas em reunião.</p>
+      </div>
+      <div class="notes-block" aria-label="Área visual reservada para futuras observações">
+        As anotações poderão ser organizadas aqui em uma próxima etapa.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>A Floresta que Fala — Produção</span>
+    <span>Uso interno / Cooperativa dos Empreendedores de Belo Horizonte</span>
+  </footer>
+
+  <script>
+    // Este login é apenas identificação interna para registro de acesso. Não substitui autenticação segura.
+    const WEB_APP_URL = "";
+    const CURRENT_DOCUMENT_VERSION = "VCBH-2026.001";
+    const USER_STORAGE_KEY = "floresta-producao-usuario";
+    const ACCESS_LOG_STORAGE_KEY = "floresta-producao-acessos";
+    const AUTH_SESSION_KEY = "floresta-producao-autenticado";
+    const USER_PASSWORD_HASHES = Object.freeze({
+      "Caio": "6f88572dbb145a0b9cc7b98a4c74312ec28bfdab1b4334bdf42425b1af6f5985",
+      "Ricardo": "a3de53622fa85b86d0de00967a3a147ce11628f8ac3c29a92c9d579c0e2ba1cc",
+      "Fernando": "5a11e3e36f1f198a385d7e32c8b0a0baaea337ce51327eb4d8567aab08c468ea",
+      "João": "8fc8dacbfdf3ccd6d4c64751ed25f0c81e85824e48199b19de509dddfe56186d",
+      "Visitante autorizado": "1b6141f74656230fd23cf52c9946a37e0655f55b6f45bd692c2e6d1df4a225a1"
+    });
+
+    function registrarEntrada(usuario, observacao = "") {
+      const agora = new Date();
+      const registro = {
+        usuario,
+        data: agora.toLocaleDateString("pt-BR"),
+        hora: agora.toLocaleTimeString("pt-BR"),
+        pagina: window.location.pathname || "producao.html",
+        versaoDocumental: CURRENT_DOCUMENT_VERSION,
+        navegador: navigator.userAgent,
+        observacao
+      };
+
+      let historico = [];
+      try {
+        historico = JSON.parse(localStorage.getItem(ACCESS_LOG_STORAGE_KEY)) || [];
+        historico.push(registro);
+        localStorage.setItem(ACCESS_LOG_STORAGE_KEY, JSON.stringify(historico));
+      } catch (error) {
+        console.warn("Não foi possível salvar o histórico de acesso localmente.", error);
+      }
+
+      console.info("Entrada registrada:", registro);
+
+      if (WEB_APP_URL) {
+        fetch(WEB_APP_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(registro)
+        }).catch((error) => {
+          console.warn("Não foi possível enviar o registro ao Google Apps Script.", error);
+        });
+      }
+
+      return registro;
+    }
+
+    const accessForm = document.querySelector("#access-form");
+    const accessUser = document.querySelector("#access-user");
+    const accessPassword = document.querySelector("#access-password");
+    const accessMessage = document.querySelector("#access-message");
+    const accessRegistered = document.querySelector("#access-registered");
+    const changeUserButton = document.querySelector("#change-user");
+    const issueDocumentButton = document.querySelector("#issue-document");
+
+    const liberarAcesso = (usuario) => {
+      document.body.classList.add("access-granted");
+      accessRegistered.textContent = `Acesso registrado: ${usuario}`;
+      document.querySelector("main")?.focus({ preventScroll: true });
+    };
+
+    const hashPassword = async (password) => {
+      const data = new TextEncoder().encode(password);
+      const digest = await crypto.subtle.digest("SHA-256", data);
+      return [...new Uint8Array(digest)]
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    };
+
+    accessForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const usuario = accessUser.value;
+      const senha = accessPassword.value;
+
+      if (!usuario || !senha) {
+        accessMessage.textContent = "Selecione o usuário e informe a senha.";
+        (usuario ? accessPassword : accessUser).focus();
+        return;
+      }
+
+      const passwordHash = await hashPassword(senha);
+      if (USER_PASSWORD_HASHES[usuario] !== passwordHash) {
+        accessMessage.textContent = "Usuário ou senha incorretos.";
+        accessPassword.value = "";
+        accessPassword.focus();
+        return;
+      }
+
+      try {
+        localStorage.setItem(USER_STORAGE_KEY, usuario);
+        sessionStorage.setItem(AUTH_SESSION_KEY, "true");
+      } catch (error) {
+        console.warn("Não foi possível manter a sessão neste navegador.", error);
+      }
+
+      registrarEntrada(usuario);
+      accessPassword.value = "";
+      accessMessage.textContent = "";
+      liberarAcesso(usuario);
+    });
+
+    changeUserButton.addEventListener("click", () => {
+      try {
+        localStorage.removeItem(USER_STORAGE_KEY);
+        sessionStorage.removeItem(AUTH_SESSION_KEY);
+      } catch (error) {
+        console.warn("Não foi possível remover o usuário salvo.", error);
+      }
+
+      document.body.classList.remove("access-granted");
+      accessRegistered.textContent = "";
+      accessUser.value = "";
+      accessPassword.value = "";
+      accessMessage.textContent = "";
+      accessUser.focus();
+    });
+
+    try {
+      const savedUser = localStorage.getItem(USER_STORAGE_KEY);
+      const authenticatedSession = sessionStorage.getItem(AUTH_SESSION_KEY) === "true";
+      if (savedUser && authenticatedSession && USER_PASSWORD_HASHES[savedUser]) {
+        registrarEntrada(savedUser, "Acesso com identificação salva no navegador.");
+        liberarAcesso(savedUser);
+      }
+    } catch (error) {
+      console.warn("Não foi possível consultar o usuário salvo.", error);
+    }
+
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[character]);
+
+    const prepareDocumentContent = (sourceDocument) => {
+      sourceDocument.querySelectorAll("details").forEach((item) => {
+        item.open = true;
+      });
+
+      sourceDocument.querySelectorAll("[hidden], [data-accordion-panel], .accordion-content, .collapsed-content").forEach((item) => {
+        item.hidden = false;
+        item.removeAttribute("hidden");
+      });
+
+      sourceDocument.querySelectorAll("[aria-expanded]").forEach((control) => {
+        control.setAttribute("aria-expanded", "true");
+      });
+
+      sourceDocument.querySelectorAll(".reveal").forEach((item) => {
+        item.classList.add("visible");
+      });
+
+      sourceDocument.querySelectorAll("img").forEach((image) => {
+        image.removeAttribute("loading");
+        image.setAttribute("fetchpriority", "high");
+        image.src = new URL(image.getAttribute("src"), sourceDocument.baseURI).href;
+      });
+
+      sourceDocument.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && !href.startsWith("#")) {
+          link.href = new URL(href, sourceDocument.baseURI).href;
+        }
+      });
+
+      sourceDocument.querySelectorAll("script, nav, button, .site-header, .skip-link, .record-mode-button, .document-metadata, .document-declaration").forEach((item) => {
+        item.remove();
+      });
+
+      sourceDocument.querySelectorAll("video, canvas, model-viewer, [src$='.glb']").forEach((item) => {
+        const fallback = sourceDocument.createElement("figure");
+        fallback.className = "model-static-fallback";
+        fallback.innerHTML = `
+          <img src="${new URL("ChatGPT Image 3 de jul. de 2026, 23_41_19.png", window.location.href).href}" alt="Imagem estática de referência da implantação">
+          <figcaption>Representação estática do conteúdo tridimensional.</figcaption>
+        `;
+        item.replaceWith(fallback);
+      });
+
+      sourceDocument.querySelectorAll("[contenteditable]").forEach((item) => {
+        item.removeAttribute("contenteditable");
+      });
+
+      return sourceDocument;
+    };
+
+    async function emitirRegistroDocumental(pageUrl, pageLabel, usuario) {
+      const documentWindow = window.open("", "_blank");
+      if (!documentWindow) {
+        window.alert("O navegador bloqueou a nova janela. Autorize pop-ups para emitir o registro.");
+        return;
+      }
+
+      documentWindow.document.write("<!doctype html><title>Preparando registro documental…</title><p style='font-family:Arial;padding:2rem'>Preparando registro documental…</p>");
+
+      try {
+        const sourceUrl = new URL(pageUrl, window.location.href);
+        const response = await fetch(sourceUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Falha ao carregar a página: ${response.status}`);
+
+        const sourceHtml = await response.text();
+        const sourceDocument = new DOMParser().parseFromString(sourceHtml, "text/html");
+        const sourceBase = sourceDocument.createElement("base");
+        sourceBase.href = sourceUrl.href;
+        sourceDocument.head.prepend(sourceBase);
+        prepareDocumentContent(sourceDocument);
+
+        const sourceMain = sourceDocument.querySelector("main");
+        if (!sourceMain) throw new Error("A página selecionada não possui conteúdo principal.");
+
+        const headings = [...sourceMain.querySelectorAll("h2")];
+        headings.forEach((heading, index) => {
+          if (!heading.id) heading.id = `secao-documental-${index + 1}`;
+        });
+
+        const indexItems = headings.map((heading, index) => `
+          <li>
+            <a href="#${escapeHtml(heading.id)}">
+              <span>${index + 1}.</span>
+              ${escapeHtml(heading.textContent.trim())}
+            </a>
+          </li>
+        `).join("");
+
+        const issuedAt = new Date();
+        const issuedDate = issuedAt.toLocaleDateString("pt-BR");
+        const issuedTime = issuedAt.toLocaleTimeString("pt-BR");
+        const issuedText = `${issuedDate} · ${issuedTime}`;
+        const safeUser = escapeHtml(usuario || "Usuário não identificado");
+        const safePageLabel = escapeHtml(pageLabel);
+        const printCssUrl = new URL("print.css", window.location.href).href;
+
+        // Pontos reservados para futura assinatura digital, QR Code e hash documental.
+        const futureIntegrityFields = `
+          <!-- FUTURO: inserir assinatura digital verificável. -->
+          <!-- FUTURO: inserir QR Code para consulta do registro. -->
+          <!-- FUTURO: calcular e exibir hash documental do conteúdo emitido. -->
+        `;
+
+        documentWindow.document.open();
+        documentWindow.document.write(`
+          <!doctype html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Registro ${CURRENT_DOCUMENT_VERSION} — ${safePageLabel}</title>
+            <link rel="stylesheet" href="${printCssUrl}">
+          </head>
+          <body class="document-record">
+            <div class="document-preview-toolbar">
+              <span>Registro preparado para arquivamento</span>
+              <button type="button" onclick="window.print()">Imprimir / Salvar PDF</button>
+            </div>
+
+            <header class="document-running-header">
+              <span>A Floresta que Fala</span>
+              <span>Registro Documental</span>
+              <span>${CURRENT_DOCUMENT_VERSION}</span>
+            </header>
+
+            <footer class="document-running-footer">
+              <span><b>Projeto</b> A Floresta que Fala</span>
+              <span><b>Página</b> Virada Cultural Belo Horizonte</span>
+              <span><b>Versão</b> ${CURRENT_DOCUMENT_VERSION}</span>
+              <span><b>Emitido</b> ${issuedText}</span>
+              <span><b>Usuário</b> ${safeUser}</span>
+            </footer>
+
+            <main class="document-record-main">
+              <section class="document-cover">
+                <p class="document-kicker">Projeto</p>
+                <h1>A FLORESTA QUE FALA</h1>
+                <p class="document-subtitle">Registro Documental</p>
+                <dl class="document-cover-data">
+                  <div><dt>Página</dt><dd>${safePageLabel}</dd></div>
+                  <div><dt>Versão</dt><dd>${CURRENT_DOCUMENT_VERSION}</dd></div>
+                  <div><dt>Data</dt><dd>${issuedDate}</dd></div>
+                  <div><dt>Hora</dt><dd>${issuedTime}</dd></div>
+                  <div><dt>Emitido por</dt><dd>${safeUser}</dd></div>
+                </dl>
+                ${futureIntegrityFields}
+              </section>
+
+              <section class="document-introduction">
+                <h2>Apresentação do registro</h2>
+                <p>Este documento registra o estado de desenvolvimento da página na data indicada.</p>
+                <p>Sua finalidade é preservar marcos temporais do projeto, apoiar a gestão administrativa da Cooperativa dos Empreendedores de Belo Horizonte e constituir documentação histórica do processo de pesquisa, criação e produção.</p>
+                <p>Mudanças posteriores não alteram o conteúdo deste registro.</p>
+              </section>
+
+              <nav class="document-index" aria-labelledby="document-index-title">
+                <h2 id="document-index-title">Índice</h2>
+                <ol>${indexItems}</ol>
+              </nav>
+
+              <div class="document-source">
+                ${sourceMain.innerHTML}
+              </div>
+
+              <section class="document-final-declaration">
+                <h2>Declaração</h2>
+                <p>O presente documento representa fielmente o estado desta página na data de emissão, constituindo registro cronológico do desenvolvimento do projeto.</p>
+                <p>Este documento destina-se ao arquivamento administrativo e jurídico junto à Cooperativa dos Empreendedores de Belo Horizonte.</p>
+                ${futureIntegrityFields}
+              </section>
+            </main>
+          ${"</bo" + "dy>"}
+          ${"</ht" + "ml>"}
+        `);
+        documentWindow.document.close();
+
+        const images = [...documentWindow.document.images];
+        await Promise.all(images.map((image) => {
+          if (image.complete) return Promise.resolve();
+          return new Promise((resolve) => {
+            image.addEventListener("load", resolve, { once: true });
+            image.addEventListener("error", resolve, { once: true });
+          });
+        }));
+
+        documentWindow.focus();
+        window.setTimeout(() => documentWindow.print(), 500);
+      } catch (error) {
+        console.error("Não foi possível emitir o registro documental.", error);
+        documentWindow.document.body.innerHTML = `
+          <p style="font-family:Arial;padding:2rem">
+            Não foi possível preparar o registro documental. Verifique se a página está disponível e tente novamente.
+          </p>
+        `;
+      }
+    }
+
+    issueDocumentButton.addEventListener("click", () => {
+      const usuario = localStorage.getItem(USER_STORAGE_KEY) || "Usuário não identificado";
+      emitirRegistroDocumental(
+        issueDocumentButton.dataset.pageUrl,
+        issueDocumentButton.dataset.pageLabel,
+        usuario
+      );
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>
